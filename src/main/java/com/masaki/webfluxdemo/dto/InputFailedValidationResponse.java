@@ -7,7 +7,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MultiplyRequestDto {
-    private int first;
-    private int second;
+public class InputFailedValidationResponse {
+    private int errorCode;
+    private int input;
+    private String message;
+
 }
