@@ -24,6 +24,7 @@ public class ReactiveMathValidationController {
         return this.mathService.findSquare(input);
     }
 
+    // handling exception in the pipeline and without controller advice.
     @GetMapping("square/{input}/mono-error")
     public Mono<Response> monoError(@PathVariable int input) {
         return Mono.just(input)
