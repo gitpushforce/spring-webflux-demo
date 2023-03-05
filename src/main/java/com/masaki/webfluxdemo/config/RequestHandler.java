@@ -1,5 +1,6 @@
 package com.masaki.webfluxdemo.config;
 
+import com.masaki.webfluxdemo.dto.MultiplyRequestDto;
 import com.masaki.webfluxdemo.dto.Response;
 import com.masaki.webfluxdemo.service.ReactiveMathService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,12 @@ public class RequestHandler {
         return ServerResponse.ok()
                 .contentType(MediaType.TEXT_EVENT_STREAM)
                 .body(responseFlux, Response.class);
+    }
+
+    public Mono<ServerResponse> multiplyHandler(ServerRequest serverRequest) {
+        Mono<MultiplyRequestDto> requestDtoMono = serverRequest.bodyToMono(MultiplyRequestDto.class);
+        Mono<Response> responseMono = this.mathService.multiply(requestDtoMono);
+        return ServerResponse.ok()
+                .body(responseMono, Response.class);
     }
 }
